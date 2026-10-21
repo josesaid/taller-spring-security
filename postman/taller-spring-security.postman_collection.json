@@ -1,0 +1,1687 @@
+{
+  "info": {
+    "name": "Taller Spring Security + JWT",
+    "description": "Requests del taller por módulo. Corre la carpeta 00 · Tokens después de M2 para guardar los tokens.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "00 · Tokens (correr después de M2 y otra vez en M5)",
+      "description": "Hace login con todos los personajes y guarda sus tokens en variables de la colección. Clic derecho en la carpeta → Run. Vuelve a correrla en M5: al cambiar el seed, los tokens viejos dejan de servir.",
+      "item": [
+        {
+          "name": "Login Ana (admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/v1/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "v1",
+                "login"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"admin@taller.dev\", \"password\": \"admin123\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"tokenAdmin\", pm.response.json().accessToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login Inés (instructora)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/v1/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "v1",
+                "login"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"ines@taller.dev\", \"password\": \"user123\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"tokenInes\", pm.response.json().accessToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login Iván (instructor + alumno)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/v1/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "v1",
+                "login"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"ivan@taller.dev\", \"password\": \"user123\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"tokenIvan\", pm.response.json().accessToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login Sofía (alumna)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/v1/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "v1",
+                "login"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"student@taller.dev\", \"password\": \"user123\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"tokenSofia\", pm.response.json().accessToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login Nico (alumno sin cursos)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/v1/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "v1",
+                "login"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"newbie@taller.dev\", \"password\": \"user123\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"tokenNico\", pm.response.json().accessToken);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Intro · La API abierta",
+      "description": "Proyecto base: todo es público.",
+      "item": [
+        {
+          "name": "01 Catálogo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course"
+              ]
+            },
+            "description": "Fíjate: trae el campo content (el material de paga)."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Material de Spring sin pagar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{springId}}/content",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{springId}}",
+                "content"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Bajarle el precio al curso de Inés",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{springId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{springId}}"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"price\": 1}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 Hacer admin a Nico",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/user/v1/user/{{nicoId}}/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "v1",
+                "user",
+                "{{nicoId}}",
+                "roles"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "[\"ROLE_ADMIN\"]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "M1 · Fundamentos",
+      "item": [
+        {
+          "name": "01 Catálogo sin credenciales",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course"
+              ]
+            },
+            "description": "Después de agregar spring-boot-starter-security, todo queda cerrado."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Mis cursos: Basic de Sofía",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "{{sofiaId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/mine",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "mine"
+              ]
+            },
+            "description": "",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "student@taller.dev",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "user123",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Usuario deshabilitado",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course"
+              ]
+            },
+            "description": "",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "disabled@taller.dev",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "user123",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 Gancho: Basic de Nico con el X-User-Id de Sofía",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "{{sofiaId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/mine",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "mine"
+              ]
+            },
+            "description": "Responde los cursos de Sofía: autenticado, pero el controller le cree al header.",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "newbie@taller.dev",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "user123",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "M2 · Login y JWT",
+      "item": [
+        {
+          "name": "01 Login Iván (pega el token en jwt.io)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/v1/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "v1",
+                "login"
+              ]
+            },
+            "description": "Copia el accessToken a jwt.io: roles trae ROLE_STUDENT y ROLE_INSTRUCTOR.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"ivan@taller.dev\", \"password\": \"user123\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"tokenIvan\", pm.response.json().accessToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Password incorrecto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/v1/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "v1",
+                "login"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"ivan@taller.dev\", \"password\": \"mal\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Usuario deshabilitado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/v1/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "v1",
+                "login"
+              ]
+            },
+            "description": "Mismo mensaje que el password incorrecto: no revela si el email existe.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"disabled@taller.dev\", \"password\": \"user123\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 Login Sofía",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/v1/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "v1",
+                "login"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"student@taller.dev\", \"password\": \"user123\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"tokenSofia\", pm.response.json().accessToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "05 Gancho: mis cursos con token",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenSofia}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/mine",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "mine"
+              ]
+            },
+            "description": "401: hay token, pero todavía no hay filtro que lo lea."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "M3 · Filtro JWT",
+      "description": "Antes: corre la carpeta 00 · Tokens.",
+      "item": [
+        {
+          "name": "01 Identidad: token de Nico con el X-User-Id de Sofía",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "{{sofiaId}}"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenNico}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/mine",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "mine"
+              ]
+            },
+            "description": "El header ya no importa: el usuario sale del token."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"✅ son los cursos de Nico: []\", () => pm.expect(pm.response.json()).to.eql([]));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Mis cursos sin token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/mine",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "mine"
+              ]
+            },
+            "description": "En M3a responde 403 vacío (no hay entry point propio). Después de M3b: 401 en JSON."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Token inválido",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer a.b.c"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/mine",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "mine"
+              ]
+            },
+            "description": "Después de M3b: 401 con \"Invalid or expired token\"."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 Gancho: Nico lee el material de Spring",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenNico}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{springId}}/content",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{springId}}",
+                "content"
+              ]
+            },
+            "description": "200: ya sabemos quién es, pero todavía no hay reglas."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "M4 · Roles y reglas",
+      "description": "Antes: corre la carpeta 00 · Tokens y reinicia la app para tener datos limpios.",
+      "item": [
+        {
+          "name": "01 Catálogo sin token (público)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Mis cursos sin token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/mine",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "mine"
+              ]
+            },
+            "description": "Su regla va antes que la del catálogo público."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Admin crea un curso",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course"
+              ]
+            },
+            "description": "Sin RoleHierarchy: 403. Con la jerarquía: 201.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Curso del admin\", \"price\": 0}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 201\", () => pm.response.to.have.status(201));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 Nico lee el material de Spring",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenNico}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{springId}}/content",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{springId}}",
+                "content"
+              ]
+            },
+            "description": "Antes de arreglar el advice: 500. Después: 403."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 403\", () => pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "05 Sofía lee el material de Spring",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenSofia}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{springId}}/content",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{springId}}",
+                "content"
+              ]
+            },
+            "description": "Adivina el código antes de enviarlo. Respuesta: 200. Está inscrita."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "06 Inés lee el material de Docker",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenInes}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{dockerId}}/content",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{dockerId}}",
+                "content"
+              ]
+            },
+            "description": "Adivina el código antes de enviarlo. Respuesta: 403. Instructora, pero no de ese curso."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 403\", () => pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "07 Iván lee el material de Spring",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenIvan}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{springId}}/content",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{springId}}",
+                "content"
+              ]
+            },
+            "description": "Adivina el código antes de enviarlo. Respuesta: 200. Su rol STUDENT y su inscripción."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "08 Iván edita Spring",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenIvan}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{springId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{springId}}"
+              ]
+            },
+            "description": "Adivina el código antes de enviarlo. Respuesta: 403. Inscrito no es instructor.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"price\": 1}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 403\", () => pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "09 Iván edita Docker",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenIvan}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{dockerId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{dockerId}}"
+              ]
+            },
+            "description": "Adivina el código antes de enviarlo. Respuesta: 200. Es su curso.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"description\": \"Actualizado por Iván\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "10 Sofía crea un curso",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenSofia}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course"
+              ]
+            },
+            "description": "Adivina el código antes de enviarlo. Respuesta: 403. No es INSTRUCTOR.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"x\", \"price\": 1}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 403\", () => pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "11 Inés se inscribe en Docker",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenInes}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{dockerId}}/enroll",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{dockerId}}",
+                "enroll"
+              ]
+            },
+            "description": "Adivina el código antes de enviarlo. Respuesta: 403. INSTRUCTOR no hereda STUDENT."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 403\", () => pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "12 Sofía se inscribe otra vez en Spring",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenSofia}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{springId}}/enroll",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{springId}}",
+                "enroll"
+              ]
+            },
+            "description": "Adivina el código antes de enviarlo. Respuesta: 409. Permitido, pero ya está inscrita."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 409\", () => pm.response.to.have.status(409));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "13 Admin lee el material de Docker",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tokenAdmin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course/{{dockerId}}/content",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course",
+                "{{dockerId}}",
+                "content"
+              ]
+            },
+            "description": "Adivina el código antes de enviarlo. Respuesta: 200. ADMIN en la expresión."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "M5 · Errores de producción",
+      "description": "Los tests muestran el estado DESPUÉS del arreglo: rojo antes, verde después.",
+      "item": [
+        {
+          "name": "01 Error 1: el catálogo filtra el material",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/course/v1/course",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "v1",
+                "course"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"✅ sin content en el catálogo\", () => pm.response.json().forEach(c => pm.expect(c.content).to.be.oneOf([null, undefined])));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Error 2: endpoint de hash sin token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/v1/password/hola",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "v1",
+                "password",
+                "hola"
+              ]
+            },
+            "description": "Antes del arreglo: 200 con un hash."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Error 3: signup pidiendo ROLE_ADMIN",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/v1/signup",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "v1",
+                "signup"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"hack{{$randomInt}}@taller.dev\", \"password\": \"x\", \"roles\": [\"ROLE_ADMIN\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"✅ solo ROLE_STUDENT\", () => pm.expect(pm.response.json().roles).to.eql([\"ROLE_STUDENT\"]));",
+                  "pm.test(\"✅ sin hash en la respuesta\", () => pm.expect(pm.response.json().password).to.be.oneOf([null, undefined]));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 CORS: preflight desde un sitio desconocido",
+          "request": {
+            "method": "OPTIONS",
+            "header": [
+              {
+                "key": "Origin",
+                "value": "https://evil.example.com"
+              },
+              {
+                "key": "Access-Control-Request-Method",
+                "value": "GET"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/user/v1/user/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "v1",
+                "user",
+                "me"
+              ]
+            },
+            "description": "Antes del arreglo (allowedOrigins \"*\"): 200."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"✅ esperado: 403\", () => pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "springId",
+      "value": "5c0d1e2f-3a4b-4c5d-8e9f-000000000001"
+    },
+    {
+      "key": "dockerId",
+      "value": "5c0d1e2f-3a4b-4c5d-8e9f-000000000002"
+    },
+    {
+      "key": "kubernetesId",
+      "value": "5c0d1e2f-3a4b-4c5d-8e9f-000000000003"
+    },
+    {
+      "key": "adminId",
+      "value": "2f1c1a6e-0b4e-4c55-9d0a-6f0e0f6a0001"
+    },
+    {
+      "key": "sofiaId",
+      "value": "2f1c1a6e-0b4e-4c55-9d0a-6f0e0f6a0002"
+    },
+    {
+      "key": "disabledId",
+      "value": "2f1c1a6e-0b4e-4c55-9d0a-6f0e0f6a0003"
+    },
+    {
+      "key": "inesId",
+      "value": "2f1c1a6e-0b4e-4c55-9d0a-6f0e0f6a0004"
+    },
+    {
+      "key": "ivanId",
+      "value": "2f1c1a6e-0b4e-4c55-9d0a-6f0e0f6a0005"
+    },
+    {
+      "key": "nicoId",
+      "value": "2f1c1a6e-0b4e-4c55-9d0a-6f0e0f6a0006"
+    },
+    {
+      "key": "tokenAdmin",
+      "value": ""
+    },
+    {
+      "key": "tokenInes",
+      "value": ""
+    },
+    {
+      "key": "tokenIvan",
+      "value": ""
+    },
+    {
+      "key": "tokenSofia",
+      "value": ""
+    },
+    {
+      "key": "tokenNico",
+      "value": ""
+    }
+  ]
+}

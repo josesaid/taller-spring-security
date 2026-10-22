@@ -1,5 +1,7 @@
 # Taller Spring Security — Course Platform API
 
+![Java: 25](https://img.shields.io/badge/Java-25-ED8B00?logo=openjdk&logoColor=white) ![Spring_Boot: 4.1.1](https://img.shields.io/badge/Spring_Boot-4.1.1-6DB33F?logo=springboot&logoColor=white) ![Database: H2](https://img.shields.io/badge/Database-H2-0F6AB8) [![Project page](https://img.shields.io/badge/Project_page-GitHub_Pages-2f80ed?logo=github&logoColor=white)](https://josesaid.github.io/taller-spring-security/)
+
 A REST API for an online course platform built with **Spring Boot 4**, **Java 25**, **Spring Data JPA** and an in-memory **H2** database.
 
 Instructors publish courses, students enroll in them, and only enrolled students should be able to read paid course content. This repository is the **unsecured baseline**: the authentication and authorization layer is what this project is meant to add, step by step.
